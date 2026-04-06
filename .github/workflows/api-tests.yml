@@ -14,22 +14,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Baixar o repositório
-        uses: actions/checkout@v5
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
 
       - name: Configurar Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: 20
 
-      - name: Instalar Newman e reporter HTML
-        run: npm install -g newman newman-reporter-htmlextra
+      - name: Instalar dependências
+        run: npm ci
 
-      - name: Rodar collection com relatório
-        run: newman run collection.json -e environment.json -r cli,htmlextra --reporter-htmlextra-export newman-report.html
+      - name: Rodar testes
+        run: npm run report
 
-      - name: Salvar relatório como artefato
-        uses: actions/upload-artifact@v5
+      - name: Salvar relatório HTML
+        uses: actions/upload-artifact@v6
         with:
           name: newman-report
           path: newman-report.html
