@@ -19,8 +19,14 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Instalar Newman
-        run: npm install -g newman
+      - name: Instalar Newman e reporter HTML
+        run: npm install -g newman newman-reporter-htmlextra
 
-      - name: Rodar collection no Newman
-        run: newman run collection.json -e environment.json
+      - name: Rodar collection com relatório
+        run: newman run collection.json -e environment.json -r cli,htmlextra --reporter-htmlextra-export newman-report.html
+
+      - name: Salvar relatório como artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: newman-report
+          path: newman-report.html
