@@ -1,0 +1,16 @@
+{
+  "name": "api-tests-newman",
+  "version": "1.0.0",
+  "description": "Testes automatizados de API com Postman, Newman e CI/CD",
+  "main": "index.js",
+  "scripts": {
+    "test": "newman run collection.json -e environment.json",
+    "report": "newman run collection.json -e environment.json -r html --reporter-html-export newman-report.html"
+  },
+  "author": "Christian Souza",
+  "license": "ISC",
+  "dependencies": {
+    "newman": "^6.0.0",
+    "newman-reporter-html": "^1.0.0"
+  }
+}
