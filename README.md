@@ -1,4 +1,4 @@
-# 🚀 API Tests com Postman + Newman + CI/CD
+# 🚀 API Tests com Postman + Newman + CI/CD + K6
 
 ![CI](https://github.com/ChristianSouza12/api-tests-newman/actions/workflows/api-tests.yml/badge.svg)
 
@@ -56,6 +56,7 @@ Relatório HTML gerado automaticamente com:
 - Newman
 - Newman Reporter HTML Extra
 - GitHub Actions (CI/CD)
+- K6 (Testes de performance)
 
 ---
 
@@ -72,11 +73,25 @@ api-tests-newman
 
 │── .gitignore
 
-└── .github/
+│
+├── k6-tests/
 
-└── workflows/
+│   ├── basic-test.js
 
-└── api-tests.yml
+│   ├── login-test.js
+
+│   ├── login-success-test.js
+
+│   └── auth-product-test.js
+
+
+└── .github
+
+ 
+  └── workflows/
+    
+  └── api-tests.yml
+        
 
 
 ---
@@ -109,8 +124,10 @@ npm run report
 ## 🔐 Autenticação
 Os testes utilizam autenticação via token JWT, gerado automaticamente durante a execução:
 
--Criação de usuário admin
--Login automático
+- Criação de usuário admin
+- Login automático
+- Token salvo dinamicamente
+- Utilização nas rotas protegidas
 
 -Token salvo dinamicamente
 
@@ -210,3 +227,19 @@ O relatório HTML contém:
 -Relatório HTML automatizado
 
 Cobertura de testes positivos e negativos
+
+
+## ⚡ Testes de performance com K6
+
+Além dos testes funcionais com Postman e Newman, o projeto também conta com testes de performance utilizando K6.
+
+Cenários implementados:
+- GET em `/produtos`
+- Login com sucesso
+- Login + captura de token + criação de produto autenticada
+- Thresholds para taxa de erro e tempo de resposta
+
+Exemplo de execução:
+
+```bash
+k6 run k6-tests/auth-product-test.js
