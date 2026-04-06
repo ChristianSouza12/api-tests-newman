@@ -122,7 +122,7 @@ npm run report
 ````
 
 ## 🔐 Autenticação
-Os testes utilizam autenticação via token JWT, gerado automaticamente durante a execução:
+Os testes utilizam autenticação via token Bearer, gerado automaticamente durante a execução:
 
 - Criação de usuário admin
 - Login automático
